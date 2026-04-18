@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我適文創 假勤申請系統</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F4F0;--s:#fff;--bd:#E3E1D9;--bds:#C5C2B8;--t:#1C1B18;--t2:#6A6860;--t3:#A09D96;
+--gn:#16A34A;--gnb:#F0FDF4;--gnbd:#BBF7D0;--am:#B45309;--amb:#FFFBEB;--ambd:#FCD34D;
+--rd:#DC2626;--rdb:#FEF2F2;--rdbd:#FECACA;--bl:#1D4ED8;--blb:#EFF6FF;--blbd:#BFDBFE;
+--pu:#7C3AED;--pub:#F5F3FF;--pubd:#DDD6FE;--r:10px;--rl:14px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--t);min-height:100vh;}
+.app{display:flex;min-height:100vh;}
+.sb{width:220px;background:var(--s);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:fixed;top:0;left:0;bottom:0;z-index:10;}
+.sbh{padding:20px 16px 16px;border-bottom:1px solid var(--bd);}
+.lm{width:32px;height:32px;background:var(--t);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:9px;}
+.lm svg{width:16px;height:16px;}
+.sbh h1{font-size:13px;font-weight:600;letter-spacing:.04em;}
+.sbh p{font-size:11px;color:var(--t3);margin-top:2px;}
+nav{padding:10px 8px;flex:1;}
+.ns{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--t3);padding:10px 10px 5px;text-transform:uppercase;}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;font-size:13px;color:var(--t2);cursor:pointer;border:none;background:none;width:100%;text-align:left;transition:all .12s;margin-bottom:1px;font-family:'Noto Sans TC',sans-serif;}
+.ni:hover{background:var(--bg);color:var(--t);}
+.ni.active{background:var(--t);color:#fff;}
+.ni svg{width:14px;height:14px;flex-shrink:0;}
+.nb{margin-left:auto;background:var(--amb);color:var(--am);font-size:10px;font-weight:600;padding:1px 6px;border-radius:100px;border:1px solid var(--ambd);}
+.ni.active .nb{background:rgba(255,255,255,.2);color:#fff;border-color:transparent;}
+.sbu{padding:12px 14px;border-top:1px solid var(--bd);display:flex;align-items:center;gap:9px;}
+.av{width:28px;height:28px;border-radius:50%;background:var(--t);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;}
+.un{font-size:13px;font-weight:500;}.ur{font-size:11px;color:var(--t3);}
+.main{margin-left:220px;flex:1;padding:28px 32px;}
+.page{display:none;}.page.active{display:block;}
+.ph{margin-bottom:22px;}.ph h2{font-size:19px;font-weight:600;}.ph p{font-size:13px;color:var(--t2);margin-top:3px;}
+.card{background:var(--s);border:1px solid var(--bd);border-radius:var(--rl);padding:20px;}
+.sec{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--t3);text-transform:uppercase;margin-bottom:12px;}
+.dvd{height:1px;background:var(--bd);margin:16px 0;}
+.ttabs{display:flex;background:var(--bg);border-radius:var(--r);padding:3px;margin-bottom:18px;}
+.ttab{flex:1;padding:8px 10px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:none;background:none;color:var(--t2);font-family:'Noto Sans TC',sans-serif;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .14s;}
+.ttab:hover{color:var(--t);}
+.ttab.active{background:var(--s);color:var(--t);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+.fg{display:flex;flex-direction:column;}
+.fg.full{grid-column:1/-1;}
+.fg label{font-size:12px;font-weight:500;color:var(--t2);margin-bottom:5px;}
+.req{color:var(--rd);margin-left:2px;}
+input,select,textarea{width:100%;padding:8px 11px;border:1px solid var(--bd);border-radius:8px;font-size:13px;font-family:'Noto Sans TC',sans-serif;color:var(--t);background:var(--s);outline:none;transition:border-color .13s;}
+input:focus,select:focus,textarea:focus{border-color:var(--t);}
+textarea{resize:vertical;min-height:80px;line-height:1.65;}
+.rg{display:flex;flex-direction:column;gap:7px;padding:10px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);}
+.ro{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--t);}
+.ro input{width:14px;height:14px;accent-color:var(--t);cursor:pointer;flex-shrink:0;}
+.btn{padding:8px 17px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid var(--bd);background:var(--s);color:var(--t);font-family:'Noto Sans TC',sans-serif;transition:all .13s;display:inline-flex;align-items:center;gap:6px;}
+.btn:hover{border-color:var(--bds);background:var(--bg);}
+.btnp{background:var(--t);color:#fff;border-color:var(--t);}.btnp:hover{opacity:.83;background:var(--t);}
+.btnsm{padding:5px 12px;font-size:12px;}
+.btnok{background:var(--gnb);color:var(--gn);border-color:var(--gnbd);}
+.btnng{background:var(--rdb);color:var(--rd);border-color:var(--rdbd);}
+.brow{display:flex;justify-content:flex-end;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--bd);}
+.badge{display:inline-flex;align-items:center;font-size:11px;font-weight:500;padding:2px 9px;border-radius:100px;white-space:nowrap;}
+.bp{background:var(--amb);color:var(--am);border:1px solid var(--ambd);}
+.ba{background:var(--gnb);color:var(--gn);border:1px solid var(--gnbd);}
+.brej{background:var(--rdb);color:var(--rd);border:1px solid var(--rdbd);}
+.bbl{background:var(--blb);color:var(--bl);border:1px solid var(--blbd);}
+.bpu{background:var(--pub);color:var(--pu);border:1px solid var(--pubd);}
+.bot{background:#FFF7ED;color:#C2410C;border:1px solid #FED7AA;}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px;}
+.sc{background:var(--s);border:1px solid var(--bd);border-radius:var(--rl);padding:15px 17px;}
+.sn{font-size:28px;font-weight:300;font-family:'DM Mono',monospace;letter-spacing:-.02em;}
+.sl{font-size:12px;color:var(--t2);margin-top:4px;}
+.dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;}
+.tw{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:8px 12px;font-size:10px;font-weight:600;letter-spacing:.07em;color:var(--t3);border-bottom:1px solid var(--bd);text-transform:uppercase;white-space:nowrap;}
+td{padding:11px 12px;border-bottom:1px solid var(--bd);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#FAFAF8;}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--bd);}
+.prow:last-child{border-bottom:none;}
+.pleft{display:flex;align-items:center;gap:11px;}
+.pname{font-size:14px;font-weight:500;}
+.pmeta{font-size:12px;color:var(--t2);margin-top:3px;line-height:1.55;}
+.pdate{font-size:11px;color:var(--t3);margin-top:2px;}
+.pacts{display:flex;gap:6px;flex-shrink:0;}
+.stabs{display:flex;border-bottom:1px solid var(--bd);margin-bottom:14px;}
+.stab{padding:8px 15px;font-size:13px;cursor:pointer;border:none;background:none;color:var(--t2);border-bottom:2px solid transparent;margin-bottom:-1px;font-family:'Noto Sans TC',sans-serif;}
+.stab.active{color:var(--t);border-bottom-color:var(--t);font-weight:500;}
+.codeb{background:#18181B;color:#E4E4E7;border-radius:var(--r);padding:13px 15px;font-family:'DM Mono',monospace;font-size:11px;line-height:1.85;margin-top:10px;overflow-x:auto;white-space:pre;}
+code{font-family:'DM Mono',monospace;font-size:12px;background:var(--bg);padding:1px 5px;border-radius:4px;}
+.sstep{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid var(--bd);}
+.sstep:last-child{border-bottom:none;}
+.snum{width:24px;height:24px;border-radius:50%;background:var(--t);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;margin-top:1px;}
+.sc2 h3{font-size:14px;font-weight:600;margin-bottom:4px;}.sc2 p{font-size:13px;color:var(--t2);line-height:1.65;}
+.warn{background:var(--amb);border:1px solid var(--ambd);border-radius:var(--r);padding:11px 14px;font-size:13px;color:var(--am);margin-bottom:16px;display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+.fbar{display:flex;gap:8px;margin-bottom:13px;}
+.fbar select{width:auto;padding:6px 10px;font-size:12px;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--t);color:#fff;padding:10px 20px;border-radius:100px;font-size:13px;opacity:0;transition:opacity .22s;pointer-events:none;white-space:nowrap;z-index:999;box-shadow:0 4px 18px rgba(0,0,0,.18);}
+.toast.show{opacity:1;}
+.empty{text-align:center;padding:34px 20px;color:var(--t3);font-size:13px;}
+.ei{font-size:24px;margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sb">
+  <div class="sbh">
+    <div class="lm"><svg viewBox="0 0 16 16" fill="none" stroke="white" stroke-width="1.6"><rect x="2" y="2" width="5" height="5" rx="1.2"/><rect x="9" y="2" width="5" height="5" rx="1.2"/><rect x="2" y="9" width="5" height="5" rx="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2"/></svg></div>
+    <h1>我適文創</h1><p>假勤申請系統</p>
+  </div>
+  <nav>
+    <div class="ns">申請</div>
+    <button class="ni active" onclick="goto('apply')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h7M3 12h5"/></svg>新增申請</button>
+    <button class="ni" onclick="goto('history')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>我的申請</button>
+    <div class="ns">管理</div>
+    <button class="ni" onclick="goto('hr')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M1 13a5 5 0 0110 0"/><path d="M11 7l1.5 1.5L15 6"/></svg>人資審核<span class="nb" id="nbadge">0</span></button>
+    <button class="ni" onclick="goto('all')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>所有記錄</button>
+    <div class="ns">系統</div>
+    <button class="ni" onclick="goto('setup')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2.5"/><path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M3.4 12.6l1.3-1.3M11.3 4.7l1.3-1.3"/></svg>設定 &amp; 說明</button>
+  </nav>
+  <div class="sbu"><div class="av" id="uav">王</div><div><div class="un" id="uname">王小明</div></div></div>
+</aside>
+<main class="main">
+
+<div class="page active" id="page-apply">
+  <div class="ph"><h2>新增申請</h2><p>送出後主管與人資將同步收到 email 通知</p></div>
+  <div class="card">
+    <div class="ttabs">
+      <button class="ttab active" onclick="stype('leave',this)">🌙 請假</button>
+      <button class="ttab" onclick="stype('trip',this)">✈️ 出差</button>
+      <button class="ttab" onclick="stype('ot',this)">⏰ 加班</button>
+    </div>
+    <div class="sec">申請人資訊</div>
+    <div class="g2" style="margin-bottom:16px">
+      <div class="fg"><label>申請人姓名 <span class="req">*</span></label><input type="text" id="fn" placeholder="請輸入姓名" oninput="syncU()"></div>
+      <div class="fg"><label>電子郵件 <span class="req">*</span></label><input type="email" id="femail" placeholder="your@email.com"></div>
+      <div class="fg"><label>申請日期</label><input type="text" id="fapplydate" readonly style="background:var(--bg);color:var(--t2);cursor:default;"></div>
+    </div>
+    <div class="dvd"></div>
+    <div id="dynf"></div>
+    <div class="fg full" style="margin-top:13px"><label>備注（選填）</label><textarea id="fnote" placeholder="補充說明..."></textarea></div>
+    <div class="brow">
+      <button class="btn" onclick="clearF()">清除</button>
+      <button class="btn btnp" onclick="doSubmit()"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 8h12M9 3l5 5-5 5"/></svg>送出申請</button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-history">
+  <div class="ph"><h2>我的申請</h2><p>個人申請紀錄與審核狀態</p></div>
+  <div class="card"><div class="tw"><table>
+    <thead><tr><th>類型</th><th>假別／地點</th><th>日期</th><th>事由</th><th>申請日期</th><th>狀態</th></tr></thead>
+    <tbody id="my-tb"></tbody>
+  </table></div></div>
+</div>
+
+<div class="page" id="page-hr">
+  <div class="ph"><h2>人資審核</h2><p>核准後系統將自動 email 通知申請人</p></div>
+  <div class="sg">
+    <div class="sc"><div class="sn" id="s1">0</div><div class="sl"><span class="dot" style="background:var(--am)"></span>待審核</div></div>
+    <div class="sc"><div class="sn" id="s2">0</div><div class="sl"><span class="dot" style="background:var(--gn)"></span>已核准</div></div>
+    <div class="sc"><div class="sn" id="s3">0</div><div class="sl"><span class="dot" style="background:var(--bl)"></span>請假</div></div>
+    <div class="sc"><div class="sn" id="s4">0</div><div class="sl"><span class="dot" style="background:var(--t3)"></span>總申請數</div></div>
+  </div>
+  <div class="card">
+    <div class="stabs">
+      <button class="stab active" onclick="htab('p',this)">待審核</button>
+      <button class="stab" onclick="htab('h',this)">已處理</button>
+    </div>
+    <div id="hr-p"></div>
+    <div id="hr-h" style="display:none"></div>
+  </div>
+</div>
+
+<div class="page" id="page-all">
+  <div class="ph"><h2>所有申請記錄</h2><p>全公司申請紀錄</p></div>
+  <div class="card">
+    <div class="fbar">
+      <select id="ftype" onchange="renderAll()"><option value="">所有類型</option><option value="請假">請假</option><option value="出差">出差</option><option value="加班">加班</option></select>
+      <select id="fstat" onchange="renderAll()"><option value="">所有狀態</option><option value="待審">待審</option><option value="核准">核准</option><option value="退回">退回</option></select>
+    </div>
+    <div class="tw"><table>
+      <thead><tr><th>申請人</th><th>類型</th><th>假別／地點</th><th>日期</th><th>申請日期</th><th>狀態</th></tr></thead>
+      <tbody id="all-tb"></tbody>
+    </table></div>
+  </div>
+</div>
+
+<div class="page" id="page-setup">
+  <div class="ph"><h2>設定 &amp; 說明</h2><p>串接 Google Sheets，啟用自動 email 通知</p></div>
+  <div class="warn"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" style="flex-shrink:0;margin-top:1px"><circle cx="8" cy="8" r="6"/><path d="M8 5v3M8 10.5v.5"/></svg>目前為本機暫存模式，重新整理後資料消失。完成以下設定即可啟用永久儲存與 email 通知。</div>
+  <div class="card">
+    <div class="sec">系統設定</div>
+    <div class="g2" style="margin-bottom:14px">
+      <div class="fg"><label>Google Apps Script 網址</label><input type="text" id="cu" placeholder="https://script.google.com/macros/s/..."></div>
+      <div class="fg"><label>人資 Email</label><input type="email" id="ch" placeholder="hr@company.com"></div>
+      <div class="fg"><label>Google Sheet ID</label><input type="text" id="csi" placeholder="網址中 /d/ 後面那段文字"></div>
+      <div class="fg"><label>公司名稱（顯示於通知信）</label><input type="text" id="cco" placeholder="我適文創有限公司"></div>
+    </div>
+    <button class="btn btnp" onclick="saveCfg()">儲存設定</button>
+  </div>
+  <div class="card" style="margin-top:13px">
+    <div class="sec">串接步驟</div>
+    <div class="sstep"><div class="snum">1</div><div class="sc2"><h3>建立 Google Sheets</h3><p>新增試算表，命名「我適文創假勤記錄」。複製網址中 <code>/d/</code> 和 <code>/edit</code> 之間的 ID，填入上方設定。</p></div></div>
+    <div class="sstep"><div class="snum">2</div><div class="sc2"><h3>建立 Apps Script</h3><p>試算表 → 擴充功能 → Apps Script，刪除預設程式碼，貼入以下程式碼並修改前三行常數後儲存：</p>
+    <div class="codeb">const HR_EMAIL = 'hr@company.com';   // 人資信箱
+const SHEET_ID = '你的-Sheet-ID';    // Google Sheet ID
+const COMPANY  = '我適文創有限公司';
+
+function doPost(e) {
+  const d  = JSON.parse(e.postData.contents);
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  let   sh = ss.getSheetByName('申請記錄') || ss.insertSheet('申請記錄');
+  if (sh.getLastRow() === 0)
+    sh.appendRow(['編號','申請人','Email','部門','主管','類型',
+      '假別/地點','日期','結束日期','出差時間','事由','備注','送出時間','狀態']);
+  const id = 'REQ-' + Date.now();
+  sh.appendRow([id,d.name,d.email,d.dept,d.manager,d.type,
+    d.sub,d.startDate,d.endDate,d.tripTime||'',
+    d.reason,d.note,new Date().toLocaleString('zh-TW'),'待審']);
+  // 同步通知人資 + 主管（主管須填 managerEmail 欄位）
+  const subj = `[假勤申請] ${d.name}・${d.type} ${d.startDate}`;
+  const html = buildMail(d, id);
+  MailApp.sendEmail({ to: HR_EMAIL, subject: subj, htmlBody: html });
+  if (d.managerEmail)
+    MailApp.sendEmail({ to: d.managerEmail, subject: subj, htmlBody: html });
+  return ContentService
+    .createTextOutput(JSON.stringify({ok:true,id}))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function buildMail(d, id) {
+  const row=(bg,k,v)=>
+    `&lt;tr style="background:${bg}"&gt;&lt;td style="padding:9px 12px;color:#888;width:90px"&gt;${k}&lt;/td&gt;
+     &lt;td style="padding:9px 12px"&gt;${v}&lt;/td&gt;&lt;/tr&gt;`;
+  return `&lt;div style="font-family:sans-serif;max-width:520px;color:#1C1B18"&gt;
+    &lt;h2 style="font-size:17px;margin-bottom:14px"&gt;📋 假勤申請通知&lt;/h2&gt;
+    &lt;table style="width:100%;border-collapse:collapse;font-size:14px"&gt;
+      ${row('#F5F4F0','編號','&lt;b&gt;'+id+'&lt;/b&gt;')}
+      ${row('#fff','申請人',d.name+'（'+d.dept+'）')}
+      ${row('#F5F4F0','類型',d.type+(d.sub?'・'+d.sub:''))}
+      ${row('#fff','日期',d.startDate+(d.endDate&amp;&amp;d.endDate!==d.startDate?' ～ '+d.endDate:''))}
+      ${d.tripTime?row('#F5F4F0','出差時間',d.tripTime):''}
+      ${row('#fff','事由',d.reason||'（無）')}
+    &lt;/table&gt;
+    &lt;p style="font-size:12px;color:#aaa;margin-top:14px"&gt;此信由 ${COMPANY} 假勤系統自動發送&lt;/p&gt;
+  &lt;/div&gt;`;
+}
+
+function doGet() {
+  const sh=SpreadsheetApp.openById(SHEET_ID).getSheetByName('申請記錄');
+  if(!sh||sh.getLastRow()&lt;=1) return ContentService.createTextOutput('[]');
+  const[h,...rows]=sh.getDataRange().getValues();
+  return ContentService
+    .createTextOutput(JSON.stringify(rows.map(r=>Object.fromEntries(h.map((k,i)=>[k,r[i]])))))
+    .setMimeType(ContentService.MimeType.JSON);
+}</div></div></div>
+    <div class="sstep"><div class="snum">3</div><div class="sc2"><h3>部署為 Web App</h3><p>「部署 → 新增部署」→ 類型「網路應用程式」→ 執行身分「我」→ 存取「所有人」→ 按部署 → 複製網址貼入上方設定後儲存。</p></div></div>
+    <div class="sstep"><div class="snum">4</div><div class="sc2"><h3>完成！</h3><p>每筆申請自動寫入 Google Sheets，並同步 email 通知人資與主管。若要加入主管信箱自動帶入，可在申請表單加一欄「主管 Email」，系統會自動寄送。</p></div></div>
+  </div>
+</div>
+
+</main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+let CFG=JSON.parse(localStorage.getItem('wsc_cfg')||JSON.stringify({
+  url:'https://script.google.com/macros/s/AKfycbz0pDZFw696Jtl-3L7E9QDi657-quWOdKvfjSbxXrNmKRbXvxUFv1qC9nslVY9ThN2V/exec',
+  hr:'hp_lee@avct.com.tw',
+  sid:'12D_zCIt-HmIsT9PEa1RezlHi1hfRUVFKy4czKXCDgUE',
+  co:'我適文創有限公司'
+}));
+let REC=JSON.parse(localStorage.getItem('wsc_rec')||'null');
+let CT='leave';
+
+if(!REC)REC=[
+  {id:'REQ-001',name:'陳志偉',email:'chen@co.com',dept:'業務部',manager:'劉經理',type:'請假',sub:'特休',startDate:'2026-04-14',endDate:'2026-04-15',tripTime:'',reason:'家庭旅遊',note:'',time:'2026-04-12 09:30',status:'核准'},
+  {id:'REQ-002',name:'李美華',email:'lee@co.com',dept:'行銷部',manager:'張主管',type:'出差',sub:'新光三越 - 台南市',startDate:'2026-04-18',endDate:'2026-04-20',tripTime:'08:00-19:00',reason:'春季展場',note:'',time:'2026-04-16 14:20',status:'待審'},
+  {id:'REQ-003',name:'王小明',email:'wang@co.com',dept:'業務部',manager:'劉經理',type:'加班',sub:'補休',startDate:'2026-04-10',endDate:'2026-04-10',tripTime:'18:00-22:00',reason:'趕季報',note:'',time:'2026-04-10 20:00',status:'待審'},
+  {id:'REQ-004',name:'吳雅婷',email:'wu@co.com',dept:'設計部',manager:'陳主管',type:'請假',sub:'病假',startDate:'2026-04-17',endDate:'2026-04-17',tripTime:'',reason:'就醫',note:'',time:'2026-04-17 08:15',status:'退回'},
+];
+
+document.getElementById('cu').value=CFG.url||'https://script.google.com/macros/s/AKfycbz0pDZFw696Jtl-3L7E9QDi657-quWOdKvfjSbxXrNmKRbXvxUFv1qC9nslVY9ThN2V/exec';
+if(CFG.hr)document.getElementById('ch').value=CFG.hr;
+if(CFG.sid)document.getElementById('csi').value=CFG.sid;
+if(CFG.co)document.getElementById('cco').value=CFG.co;
+
+function goto(pg){
+  const pages=['apply','history','hr','all','setup'];
+  document.querySelectorAll('.ni').forEach((n,i)=>n.classList.toggle('active',pages[i]===pg));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+pg).classList.add('active');
+  if(pg==='history')renderHistory();
+  if(pg==='hr'){renderHRP();renderHRH();updStats();}
+  if(pg==='all')renderAll();
+  updBadge();
+}
+function stype(t,el){CT=t;document.querySelectorAll('.ttab').forEach(x=>x.classList.remove('active'));el.classList.add('active');renderDyn();}
+function renderDyn(){
+  const f=document.getElementById('dynf');
+  const S=s=>'<div class="sec">'+s+'</div>';
+  if(CT==='leave'){f.innerHTML=S('請假資訊')+'<div class="g2"><div class="fg"><label>請假類別 <span class="req">*</span></label><div class="rg"><label class="ro"><input type="radio" name="lt" value="特休" checked>特休</label><label class="ro"><input type="radio" name="lt" value="補休">補休</label><label class="ro"><input type="radio" name="lt" value="事假">事假</label><label class="ro"><input type="radio" name="lt" value="病假">病假</label><label class="ro"><input type="radio" name="lt" value="其他">其他（請在備注說明）</label></div></div><div class="fg" style="display:flex;flex-direction:column;gap:11px"><div class="fg"><label>請假開始日 <span class="req">*</span></label><input type="date" id="fstart"></div><div class="fg"><label>結束日（跨日填寫）</label><input type="date" id="fend"></div></div><div class="fg full"><label>請假事由說明 <span class="req">*</span></label><textarea id="freason" placeholder="請補充說明事由"></textarea></div></div>';}
+  else if(CT==='trip'){f.innerHTML=S('出差資訊')+'<div class="g2"><div class="fg"><label>出差日期 <span class="req">*</span></label><input type="date" id="fstart"></div><div class="fg"><label>出差時間 <span class="req">*</span></label><input type="text" id="ftrip" placeholder="例：08:00 - 19:00"></div><div class="fg"><label>地點（專櫃／展場 - 縣市）<span class="req">*</span></label><input type="text" id="fdest" placeholder="例：新光三越 - 台南市"></div><div class="fg"><label>預計返回日期</label><input type="date" id="fend"></div><div class="fg full"><label>事由 <span class="req">*</span></label><textarea id="freason" placeholder="說明出差目的..."></textarea></div></div>';}
+  else{f.innerHTML=S('加班資訊')+'<div class="g2"><div class="fg"><label>加班日期 <span class="req">*</span></label><input type="date" id="fstart"></div><div class="fg"><label>補償方式</label><select id="fotc"><option>補休</option><option>領加班費</option></select></div><div class="fg"><label>開始時間</label><input type="time" id="fos"></div><div class="fg"><label>結束時間</label><input type="time" id="foe"></div><div class="fg full"><label>加班事由 <span class="req">*</span></label><textarea id="freason" placeholder="說明加班原因..."></textarea></div></div>';}
+}
+async function doSubmit(){
+  const name=document.getElementById('fn').value.trim();
+  const email=document.getElementById('femail').value.trim();
+  if(!name){toast('請填寫申請人姓名');return;}
+  if(!email){toast('請填寫電子郵件');return;}
+  const dept='';
+  const manager='';
+  const reason=document.getElementById('freason')?.value?.trim()||'';
+  const note=document.getElementById('fnote').value;
+  const tl={leave:'請假',trip:'出差',ot:'加班'}[CT];
+  let sub='',startDate='',endDate='',tripTime='';
+  if(CT==='leave'){sub=document.querySelector('input[name="lt"]:checked')?.value||'';startDate=document.getElementById('fstart')?.value||'';endDate=document.getElementById('fend')?.value||startDate;}
+  else if(CT==='trip'){sub=document.getElementById('fdest')?.value||'';startDate=document.getElementById('fstart')?.value||'';endDate=document.getElementById('fend')?.value||startDate;tripTime=document.getElementById('ftrip')?.value||'';}
+  else{sub=document.getElementById('fotc')?.value||'補休';startDate=document.getElementById('fstart')?.value||'';endDate=startDate;const s=document.getElementById('fos')?.value,e=document.getElementById('foe')?.value;tripTime=s&&e?s+' - '+e:'';}
+  const applyDate=document.getElementById('fapplydate')?.value||new Date().toLocaleDateString('zh-TW');
+  const rec={id:'REQ-'+Date.now(),name,email,dept,manager,applyDate,type:tl,sub,startDate,endDate,tripTime,reason,note,time:new Date().toLocaleString('zh-TW'),status:'待審'};
+  REC.unshift(rec);save();updBadge();
+  if(CFG.url){try{await fetch(CFG.url,{method:'POST',body:JSON.stringify(rec)});toast('✓ 已送出，主管與人資將收到 email 通知');}catch{toast('✓ 已暫存（無法連線 Google Sheets）');}}
+  else toast('✓ 申請已暫存（設定 Apps Script 後啟用 email）');
+  clearF();
+}
+function renderHistory(){
+  const me=document.getElementById('uname').textContent;
+  const mine=REC.filter(r=>r.name===me);
+  const tb=document.getElementById('my-tb');
+  if(!mine.length){tb.innerHTML='<tr><td colspan="6"><div class="empty"><div class="ei">📋</div>尚無申請記錄</div></td></tr>';return;}
+  tb.innerHTML=mine.map(r=>'<tr><td>'+tbg(r.type)+'</td><td style="font-weight:500">'+(r.sub||'—')+'</td><td>'+r.startDate+(r.endDate&&r.endDate!==r.startDate?' ～ '+r.endDate:'')+'</td><td style="color:var(--t2);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(r.reason||'—')+'</td><td style="color:var(--t3);font-size:12px">'+(r.applyDate||r.time)+'</td><td>'+sbg(r.status)+'</td></tr>').join('');
+}
+function renderHRP(){
+  const pend=REC.filter(r=>r.status==='待審');
+  const el=document.getElementById('hr-p');
+  if(!pend.length){el.innerHTML='<div class="empty"><div class="ei">✓</div>目前沒有待審核的申請</div>';return;}
+  el.innerHTML=pend.map(r=>'<div class="prow"><div class="pleft"><div class="av">'+r.name[0]+'</div><div><div class="pname">'+r.name+'</div><div class="pmeta">'+tbg(r.type)+' <span style="margin-left:5px">'+(r.sub||'')+'</span><span style="margin:0 4px;color:var(--t3)">｜</span>'+r.startDate+(r.endDate&&r.endDate!==r.startDate?' ～ '+r.endDate:'')+(r.tripTime?'<span style="margin:0 4px;color:var(--t3)">｜</span>'+r.tripTime:'')+(r.reason?'<br>'+r.reason:'')+'</div><div class="pdate">申請日期：'+(r.applyDate||r.startDate)+' ・ 送出：'+r.time+'</div></div></div><div class="pacts"><button class="btn btnok btnsm" onclick="decide(\''+r.id+'\',\'核准\')">核准</button><button class="btn btnng btnsm" onclick="decide(\''+r.id+'\',\'退回\')">退回</button></div></div>').join('');
+}
+function renderHRH(){
+  const done=REC.filter(r=>r.status!=='待審');
+  const el=document.getElementById('hr-h');
+  if(!done.length){el.innerHTML='<div class="empty"><div class="ei">📂</div>尚無已處理記錄</div>';return;}
+  el.innerHTML='<div class="tw"><table><thead><tr><th>申請人</th><th>類型</th><th>假別／地點</th><th>日期</th><th>申請日期</th><th>狀態</th></tr></thead><tbody>'+done.map(r=>'<tr><td style="font-weight:500">'+r.name+'</td><td>'+tbg(r.type)+'</td><td>'+(r.sub||'—')+'</td><td>'+r.startDate+'</td><td style="color:var(--t3);font-size:12px">'+(r.applyDate||'')+'</td><td>'+sbg(r.status)+'</td></tr>').join('')+'</tbody></table></div>';
+}
+function updStats(){document.getElementById('s1').textContent=REC.filter(r=>r.status==='待審').length;document.getElementById('s2').textContent=REC.filter(r=>r.status==='核准').length;document.getElementById('s3').textContent=REC.filter(r=>r.type==='請假').length;document.getElementById('s4').textContent=REC.length;}
+function htab(t,el){document.querySelectorAll('.stab').forEach(s=>s.classList.remove('active'));el.classList.add('active');document.getElementById('hr-p').style.display=t==='p'?'':'none';document.getElementById('hr-h').style.display=t==='h'?'':'none';}
+function decide(id,st){const r=REC.find(r=>r.id===id);if(r){r.status=st;save();renderHRP();renderHRH();updStats();updBadge();}toast(st==='核准'?'✓ 已核准，申請人將收到通知':'已退回申請');}
+function renderAll(){
+  const tf=document.getElementById('ftype').value;
+  const sf=document.getElementById('fstat').value;
+  let data=REC.filter(r=>(!tf||r.type===tf)&&(!sf||r.status===sf));
+  const tb=document.getElementById('all-tb');
+  if(!data.length){tb.innerHTML='<tr><td colspan="6"><div class="empty"><div class="ei">🔍</div>無符合記錄</div></td></tr>';return;}
+  tb.innerHTML=data.map(r=>'<tr><td style="font-weight:500">'+r.name+'</td><td>'+tbg(r.type)+'</td><td>'+(r.sub||'—')+'</td><td>'+r.startDate+(r.endDate&&r.endDate!==r.startDate?' ～ '+r.endDate:'')+'</td><td style="color:var(--t3);font-size:12px">'+(r.applyDate||'')+'</td><td>'+sbg(r.status)+'</td></tr>').join('');
+}
+function saveCfg(){CFG={url:document.getElementById('cu').value.trim(),hr:document.getElementById('ch').value.trim(),sid:document.getElementById('csi').value.trim(),co:document.getElementById('cco').value.trim()};localStorage.setItem('wsc_cfg',JSON.stringify(CFG));toast('✓ 設定已儲存');}
+function tbg(t){const m={請假:'bbl',出差:'bpu',加班:'bot'};return'<span class="badge '+(m[t]||'bbl')+'">'+t+'</span>';}
+function sbg(s){const m={待審:'bp',核准:'ba',退回:'brej'},l={待審:'待審',核准:'✓ 核准',退回:'✗ 退回'};return'<span class="badge '+(m[s]||'bp')+'">'+(l[s]||s)+'</span>';}
+function save(){localStorage.setItem('wsc_rec',JSON.stringify(REC));}
+function updBadge(){document.getElementById('nbadge').textContent=REC.filter(r=>r.status==='待審').length;}
+function syncU(){const n=document.getElementById('fn').value;if(n){document.getElementById('uav').textContent=n[0];document.getElementById('uname').textContent=n;}}
+function clearF(){['fn','femail','fnote'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});renderDyn();setApplyDate();}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function setApplyDate(){
+  const d=new Date();
+  const s=d.getFullYear()+'/'+(d.getMonth()+1).toString().padStart(2,'0')+'/'+d.getDate().toString().padStart(2,'0');
+  const el=document.getElementById('fapplydate');
+  if(el)el.value=s;
+}
+renderDyn();setApplyDate();updBadge();
+</script>
+</body>
+</html>
