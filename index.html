@@ -116,12 +116,14 @@ code{font-family:'DM Mono',monospace;font-size:12px;background:var(--bg);padding
     <button class="ni active" onclick="goto('apply')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h10M3 8h7M3 12h5"/></svg>新增申請</button>
     <button class="ni" onclick="goto('history')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 2"/></svg>我的申請</button>
     <div class="ns">管理</div>
-    <button class="ni" onclick="goto('hr')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M1 13a5 5 0 0110 0"/><path d="M11 7l1.5 1.5L15 6"/></svg>人資審核<span class="nb" id="nbadge">0</span></button>
-    <button class="ni" onclick="goto('all')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>所有記錄</button>
+    <!-- 人資審核：第一階段暫不開放 -->
+    <!-- <button class="ni" onclick="goto('hr')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><path d="M1 13a5 5 0 0110 0"/><path d="M11 7l1.5 1.5L15 6"/></svg>人資審核<span class="nb" id="nbadge">0</span></button> -->
+    <!-- 所有記錄：第一階段暫不開放 -->
+    <!-- <button class="ni" onclick="goto('all')"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="2"/><path d="M5 8h6M5 5h6M5 11h4"/></svg>所有記錄</button> -->
     <div class="ns">系統</div>
     <button class="ni" onclick="gotoSetup()"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2.5"/><path d="M8 1.5v1.8M8 12.7v1.8M1.5 8h1.8M12.7 8h1.8M3.4 3.4l1.3 1.3M11.3 11.3l1.3 1.3M3.4 12.6l1.3-1.3M11.3 4.7l1.3-1.3"/></svg>設定 &amp; 說明</button>
   </nav>
-  <div class="sbu"><div class="av" id="uav">？</div><div><div class="un" id="uname">請輸入姓名</div></div></div>
+  <!-- 左下角姓名顯示：已移除（無實際功能） -->
 </aside>
 <main class="main">
 
@@ -372,7 +374,7 @@ function tbg(t){const m={請假:'bbl',出差:'bpu',加班:'bot'};return'<span cl
 function sbg(s){const m={待審:'bp',核准:'ba',退回:'brej'},l={待審:'待審',核准:'✓ 核准',退回:'✗ 退回'};return'<span class="badge '+(m[s]||'bp')+'">'+(l[s]||s)+'</span>';}
 function save(){localStorage.setItem('wsc_rec',JSON.stringify(REC));}
 function updBadge(){document.getElementById('nbadge').textContent=REC.filter(r=>r.status==='待審').length;}
-function syncU(){const n=document.getElementById('fn').value;if(n){document.getElementById('uav').textContent=n[0];document.getElementById('uname').textContent=n;}}
+function syncU(){/* 已移除姓名同步功能 */}
 function clearF(){['fn','femail','fnote'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});renderDyn();setApplyDate();}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 function setApplyDate(){
